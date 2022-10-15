@@ -3,13 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from src.driver.session import SessionManager
-from src.routers import user
+from src.routers import user, product
 from .di import injector
 
 app = FastAPI()
 
 
 app.include_router(user.router)
+app.include_router(product.router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins = ["*"],
