@@ -4,7 +4,7 @@ services:
     image: "devcamp-backend:1.0"
     build: .
     ports:
-      - "8081:8080"
+      - "8081:8000"
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - DB_NAME=${DB_NAME}
@@ -14,4 +14,10 @@ services:
       - type: bind
         source: ./src
         target: /app/src
+      - type: bind
+        source: ./model
+        target: /app/model
+      - type: bind
+        source: ./yolov7
+        target: /app/yolov7
     restart: unless-stopped
