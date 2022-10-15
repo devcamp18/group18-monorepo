@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { GetServerSideProps, NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MeasuredSizeCard from '../../components/shared/MeasuredSizeCard';
 import MeasureSizeCallToActionCard from '../../components/shared/MeasureSizeCallToActionCard';
+import { useAuth } from '../../hooks/useAuth';
 import { Product } from '../../models/Product';
+import { User } from '../../models/User';
 import { ProductService } from '../../services/ProductService';
 import Layout from '../../widgets/Layout';
 
@@ -13,6 +15,47 @@ type Props = {
 
 const ProductDetailPage: NextPage = ({ product }: Props) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes[0].name);
+  const { currentUser } = useAuth();
+  const [recommendedSizes, setRecommendedSizes] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (currentUser) {
+      const result = predictSize();
+      setRecommendedSizes(result.map((r) => r.name));
+      if (result.length) {
+        setSelectedSize(result[0].name);
+      }
+    }
+  }, [currentUser]);
+
+  const predictSize = () => {
+    const { width, length } = currentUser as User;
+    const sizes = product.sizes;
+
+    const WIDTH_THRESHOLD_UP_IN_CM = 3;
+    const WIDTH_THRESHOLD_DOWN_IN_CM = -1;
+    const LENGTH_THRESHOLD_UP_IN_CM = 4;
+    const LENGTH_THRESHOLD_DOWN_IN_CM = -2;
+
+    let results = [];
+    for (const size of sizes) {
+      const wDiff = size.width - width;
+      const hDiff = size.length - length;
+
+      console.log({ size: size.name, wDiff, hDiff });
+
+      if (
+        wDiff <= WIDTH_THRESHOLD_UP_IN_CM &&
+        wDiff >= WIDTH_THRESHOLD_DOWN_IN_CM &&
+        hDiff <= LENGTH_THRESHOLD_UP_IN_CM &&
+        hDiff >= LENGTH_THRESHOLD_DOWN_IN_CM
+      ) {
+        results.push(size);
+      }
+    }
+
+    return results;
+  };
 
   return (
     <Layout>
@@ -35,8 +78,11 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
       <div className='border-b my-6'></div>
 
       <section>
-        <MeasureSizeCallToActionCard />
-        {/* <MeasuredSizeCard size='M' /> */}
+        {currentUser && currentUser.has_body_size ? (
+          <MeasuredSizeCard sizes={recommendedSizes} />
+        ) : (
+          <MeasureSizeCallToActionCard />
+        )}
 
         <div className='mt-4'>
           <span className='font-bold'>Pilih ukuran</span>
