@@ -5,6 +5,7 @@ from src.specs.user import (
     GetUserResponse,
     GetUserAllResponse,
     LoginRequest,
+    PostUserClothesSizeRequest
 )
 from src.services import UserService
 from src.di import injector
@@ -31,6 +32,12 @@ def get_user_by_id(id: str, request: Request):
         message="Successfully retrieved user",
         data=user
     )
+
+@router.post("/users/{id}/clothes_size", response_model=GetUserResponse)
+def post_user_clothes_size(id:str, spec: PostUserClothesSizeRequest):
+    user = _user_service.post_user_clothes_size(id, spec)
+    return user
+
 
 @router.post("/login", response_model=GetUserResponse)
 def login(spec: LoginRequest):

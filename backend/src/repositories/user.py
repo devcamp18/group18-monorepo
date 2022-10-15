@@ -25,3 +25,8 @@ class UserRepository:
         users = database["user"].find(limit=100)
 
         return list(users)
+
+    def put_user_clothes_size(self, user_id:str, width:float, length:float) -> Optional[User]:
+        database = self.session_manager.get_database()
+        users = database["user"].update_one({"_id":user_id}, {'$inc': {'width': width, 'length': length}}, upsert=True)
+        return users

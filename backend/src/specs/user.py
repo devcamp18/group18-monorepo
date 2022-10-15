@@ -17,5 +17,9 @@ class LoginRequest(BaseModel):
     email: str
 
 
+class PostUserClothesSizeRequest(BaseModel):
+    width: float
+    length: float
+
 class LoginResponse(BaseResponse):
     data: Optional[User]
