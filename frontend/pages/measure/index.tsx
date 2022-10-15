@@ -6,7 +6,11 @@ const Measure = () => {
   const [Picture, setPicture] = useState('');
   const handlePictureChange = (e: any) => {
     setPicture(() => {
-      return URL.createObjectURL(e.target.files[0]);
+      try {
+        return URL.createObjectURL(e.target.files[0]);
+      } catch (error) {
+        return '';
+      }
     });
   };
   return (
@@ -46,7 +50,7 @@ const Measure = () => {
             className='block text-sm font-bold w-full text-primary-dark p-2 rounded text-center border border-primary-dark border-dashed cursor-pointer'
             htmlFor='picture'
           >
-            Ambil Foto
+            {Picture ? 'Foto Ulang' : 'Ambil Foto'}
           </label>
           <input
             type='file'

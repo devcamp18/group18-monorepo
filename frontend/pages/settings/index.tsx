@@ -36,7 +36,7 @@ const Settings = () => {
         <p>
           Gak tau ukuran bajumu? Pap badan kamu dan kami bakal bantu ukurin.{' '}
           <Link href='/measure'>
-            <a className='text-primary font-semibold'>Ukur sekarang!</a>
+            <a className='text-primary-dark font-semibold'>Ukur sekarang!</a>
           </Link>
         </p>
 
