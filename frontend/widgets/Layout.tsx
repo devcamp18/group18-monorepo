@@ -12,6 +12,10 @@ const Layout: React.FC<Props> = ({ children, navTitle }) => {
         <title>Devcamp 18</title>
         <meta name='description' content='Devcamp 18' />
         <link rel='icon' href='/favicon.ico' />
+        <script
+          defer
+          src='https://kit.fontawesome.com/de5313551e.js'
+          crossOrigin='anonymous'></script>
       </Head>
 
       <nav className='w-full bg-primary text-white p-4 font-medium'>{navTitle ?? 'Devcamp 18'}</nav>

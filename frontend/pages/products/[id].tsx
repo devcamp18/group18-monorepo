@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from 'next';
+import BodySizeCallToActionCard from '../../components/shared/BodySizeCallToActionCard';
 import Layout from '../../widgets/Layout';
 
 const ProductDetailPage: NextPage = () => {
@@ -28,7 +29,9 @@ const ProductDetailPage: NextPage = () => {
       <div className='border-b my-6'></div>
 
       <section>
-        <div>
+        <BodySizeCallToActionCard />
+
+        <div className='mt-4'>
           <span className='font-bold'>Pilih ukuran</span>
           <ul className='flex space-x-4 overflow-auto pb-2 mt-2'>
             {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
