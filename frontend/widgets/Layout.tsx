@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useAuth } from '../hooks/useAuth';
 
 type Props = {
   navTitle?: string;
@@ -15,6 +16,7 @@ type Props = {
 
 const Layout: React.FC<Props> = ({ children, navTitle, withBackBtn = true }) => {
   const router = useRouter();
+  const { currentUser, signOut } = useAuth();
 
   return (
     <div>
@@ -34,16 +36,18 @@ const Layout: React.FC<Props> = ({ children, navTitle, withBackBtn = true }) => 
           <div className='font-bold text-lg mt-1'>{navTitle ?? 'Devcamp Store'}</div>
         </div>
 
-        <div>
-          <Link href='/account'>
-            <button className='p-2'>
-              <UserCircleIcon className='w-6 h-6' />
+        {!router.pathname.includes('/auth/login') && (
+          <div>
+            <Link href='/account'>
+              <button className='p-2'>
+                <UserCircleIcon className='w-6 h-6' />
+              </button>
+            </Link>
+            <button onClick={() => signOut()} className='p-2'>
+              <ArrowRightOnRectangleIcon className='w-6 h-6' />
             </button>
-          </Link>
-          <button className='p-2'>
-            <ArrowRightOnRectangleIcon className='w-6 h-6' />
-          </button>
-        </div>
+          </div>
+        )}
       </nav>
 
       <main className='p-4'>{children}</main>

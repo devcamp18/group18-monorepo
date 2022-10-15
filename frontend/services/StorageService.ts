@@ -7,4 +7,8 @@ export class StorageService {
     if (!localStorage.getItem(key)) return null;
     return JSON.parse(localStorage.getItem(key)!);
   }
+
+  public remove(key: string) {
+    localStorage.removeItem(key);
+  }
 }
