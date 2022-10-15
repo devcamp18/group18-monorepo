@@ -21,10 +21,6 @@ const Settings = () => {
   const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!currentUser) return;
-    if (width <= 0 || length <= 0) {
-      toast.error('Width and height must be greater than zero');
-      return;
-    }
 
     await toast.promise(userService.saveMeasurement(currentUser!._id, width, length), {
       error: (e) => {
