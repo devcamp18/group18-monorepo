@@ -68,7 +68,7 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
               <li
                 className={`flex ${selectedSize === size.name ? 'text-primary' : 'text-black'}`}
                 key={size.name}>
-                <div className='w-12 font-bold'>{size.name}</div>
+                <div className='min-w-[3rem] font-bold'>{size.name}</div>
                 <div>
                   : Panjang <strong>{size.length}</strong> cm, Lebar <strong>{size.width}</strong>{' '}
                   cm
