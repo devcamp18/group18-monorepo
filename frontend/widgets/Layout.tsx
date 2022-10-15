@@ -6,6 +6,7 @@ import {
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 
 type Props = {
@@ -16,7 +17,11 @@ type Props = {
 
 const Layout: React.FC<Props> = ({ children, navTitle, withBackBtn = true }) => {
   const router = useRouter();
-  const { currentUser, signOut } = useAuth();
+  const { currentUser, signOut, refetchUser } = useAuth();
+
+  useEffect(() => {
+    refetchUser();
+  });
 
   return (
     <div>
