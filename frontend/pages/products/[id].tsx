@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { GetServerSideProps, NextPage } from 'next';
+import { useState } from 'react';
 import MeasuredSizeCard from '../../components/shared/MeasuredSizeCard';
 import MeasureSizeCallToActionCard from '../../components/shared/MeasureSizeCallToActionCard';
 import { Product } from '../../models/Product';
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const ProductDetailPage: NextPage = ({ product }: Props) => {
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0].name);
+
   return (
     <Layout>
       <section>
@@ -40,7 +43,13 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
           <ul className='flex space-x-4 overflow-auto pb-2 mt-2'>
             {product.sizes.map((size) => (
               <li key={size.name}>
-                <button className='w-20 p-2 text-center border border-gray-400 rounded-md'>
+                <button
+                  onClick={() => setSelectedSize(size.name)}
+                  className={`w-20 p-2 text-center border rounded-md ${
+                    selectedSize === size.name
+                      ? 'border-primary-dark text-primary'
+                      : 'border-gray-400'
+                  }`}>
                   {size.name}
                 </button>
               </li>
