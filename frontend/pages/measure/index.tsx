@@ -30,9 +30,9 @@ const Measure = () => {
           <label className='block text-gray-700 text-sm font-bold '>
             Pap Full Body (Seperti Contoh)
           </label>
-          <div className='flex items-center'>
+          <div className='flex flex-col items-center'>
             <Image
-              alt='Contoh pose yang benar'
+              alt='Pap Full Body'
               src={
                 Picture ||
                 'https://user-images.githubusercontent.com/32232332/195977087-5e058a05-dca7-4d0d-89bb-17a8c7feff03.png'
