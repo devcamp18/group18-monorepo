@@ -1,14 +1,23 @@
 version: '3'
-services: 
+services:
   backend:
+    image: "devcamp-backend:1.0"
     build: .
-    container_name: "devcamp-backend"
-    ports: 
-        - "80:8080"
+    ports:
+      - "8081:8000"
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - DB_NAME=${DB_NAME}
       - APP_ENV=${APP_ENV}
+
     volumes:
-        - ./src:/src
+      - type: bind
+        source: ./src
+        target: /app/src
+      - type: bind
+        source: ./model
+        target: /app/model
+      - type: bind
+        source: ./yolov7
+        target: /app/yolov7
     restart: unless-stopped

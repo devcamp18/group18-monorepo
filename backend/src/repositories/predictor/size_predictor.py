@@ -88,19 +88,22 @@ class BodySizePredictor:
         return image
 
     def get_image_from_bytes(self, img_bytes: bytes) -> torch.Tensor:
-        nparr = np.fromstring(img_bytes, np.uint8)
-        img_np = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
-        image = letterbox(image, 960, stride=64, auto=True)[0]
+        image_np = np.frombuffer(img_bytes, np.uint8)
+        img_np = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
 
-        return img_np
+        image = letterbox(img_np, 960, stride=64, auto=True)[0]
+        image = transforms.ToTensor()(image)
+        image = torch.tensor(np.array([image.numpy()]))
+
+        return image
 
     def calculate(self, person_height: int = 165, image_bytes: Optional[bytes] = None, image_path: Optional[str] = None) -> Tuple[int, int]:
         image: torch.Tensor
         if image_bytes is not None:
             image = self.get_image_from_bytes(image_bytes)
 
-        if image_bytes is not None:
-            image = self.get_image_from_bytes(image_bytes)
+        if image_path is not None:
+            image = self.get_image_from_path(image_path)
     
         top_position =  self.get_top_position(image)
         right_shoulder,left_shoulder, right_hip, left_hip, right_ankle, left_ankle = self.get_keypoints(image)

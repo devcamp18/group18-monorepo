@@ -9,4 +9,4 @@ class RepositoryModule(Module):
     def configure(self, binder: Binder) -> None:
         binder.bind(UserRepository, to=UserRepository, scope=singleton)
         binder.bind(ProductRepository, to=ProductRepository, scope=singleton)
-        # binder.bind(BodySizePredictor, to=BodySizePredictor, scope=singleton)
+        binder.bind(BodySizePredictor, to=BodySizePredictor, scope=singleton)
