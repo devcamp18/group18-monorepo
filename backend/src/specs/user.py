@@ -1,7 +1,7 @@
 from typing import List
 from pydantic import BaseModel
 
-from src.response import BaseResponse
+from .base import BaseResponse
 from src.models import User
 
 
