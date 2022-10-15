@@ -5,12 +5,16 @@ from src.specs.user import (
     GetUserResponse,
     GetUserAllResponse,
     LoginRequest,
+    CreateUserResponse,
+    CreateUserRequest,
 )
 from src.services import UserService
 from src.di import injector
 
 _user_service = injector.get(UserService)
-router = APIRouter()
+router = APIRouter(
+    tags=["Users"],
+)
 
 
 @router.get("/users", response_model=GetUserAllResponse)
@@ -31,6 +35,17 @@ def get_user_by_id(id: str, request: Request):
         message="Successfully retrieved user",
         data=user
     )
+
+
+@router.post("/users", response_model=CreateUserResponse)
+def create_user(spec: CreateUserRequest):
+    user = _user_service.create(spec)
+    return CreateUserResponse(
+        status="success",
+        message="Success Create User",
+        data=user
+    )
+
 
 @router.post("/login", response_model=GetUserResponse)
 def login(spec: LoginRequest):
