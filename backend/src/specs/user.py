@@ -13,6 +13,16 @@ class GetUserAllResponse(BaseResponse):
     data: List[User]
 
 
+class CreateUserRequest(BaseModel):
+    email: str
+    name: str
+    profile_url: str
+
+
+class CreateUserResponse(BaseResponse):
+    data: User
+
+
 class LoginRequest(BaseModel):
     email: str
 

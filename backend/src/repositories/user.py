@@ -1,5 +1,6 @@
 from typing import List, Optional
 from injector import inject
+from fastapi.encoders import jsonable_encoder
 
 from src.driver.session import SessionManager
 from src.models import User
@@ -25,3 +26,12 @@ class UserRepository:
         users = database["user"].find(limit=100)
 
         return list(users)
+
+    def create(self, user: User) -> User:
+        database = self.session_manager.get_database()
+        user = jsonable_encoder(user)
+
+        user = database["user"].insert_one(user)
+        result_user = database["user"].find_one({"_id": user.inserted_id})
+
+        return result_user
