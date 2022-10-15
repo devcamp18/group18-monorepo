@@ -7,6 +7,8 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends build-essential gcc \
     libsndfile1 ffmpeg libsm6 libxext6  -y
 
+
+
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
@@ -19,5 +21,5 @@ RUN apt-get install python3-tk -y
 
 COPY main.py /app/main.py
 
-CMD ["uvicorn", "src:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["python3" ,"main.py" ,"run"]
 
