@@ -13,6 +13,7 @@ class BodySizePredictor():
         
 
         # Initialize Keypoint Model
+        print(model_keypoint_path)
         weigths_keypoint = torch.load(model_keypoint_path, map_location=device)
         self.model_keypoint = weigths_keypoint['model']
         _ = self.model_keypoint.float().eval()
