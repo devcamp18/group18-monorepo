@@ -14,9 +14,14 @@ export class UserService extends BaseService {
   }
 
   public async getUser(userId: string) {
-    console.log('Get user called');
     return axios
       .get<Response<User>>(`${this.API_URL}/users/${userId}`)
+      .then((res) => res.data.data);
+  }
+
+  public async measureSize(formData: FormData) {
+    return axios
+      .post<Response<{ width: number; length: number }>>(`${this.API_URL}/predictor/file`, formData)
       .then((res) => res.data.data);
   }
 }
