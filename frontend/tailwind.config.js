@@ -6,11 +6,12 @@ module.exports = {
     './widgets/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    colors: {
-      primary: '#42B549',
-      'primary-dark': '#01AB5C',
+    extend: {
+      colors: {
+        primary: '#42B549',
+        'primary-dark': '#01AB5C',
+      },
     },
-    extend: {},
   },
   plugins: [],
 };
