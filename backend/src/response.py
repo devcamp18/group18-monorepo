@@ -1,8 +1,7 @@
 from pydantic import BaseModel
-from typing import Any, Optional
+from typing import Optional
 
 
 class BaseResponse(BaseModel):
     status: str
     message: Optional[str]
-    data: Optional[Any]

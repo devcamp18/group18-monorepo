@@ -1,8 +1,10 @@
 from injector import Injector
 
-from src.drivers.module import DriverModule
+from src.driver.module import DriverModule
+from src.user.module import UserModule
 
 
 injector = Injector([
-    DriverModule
+    DriverModule,
+    UserModule
 ])
