@@ -4,10 +4,8 @@ import cv2
 from torchvision import transforms
 import numpy as np
 
-from utils import letterbox
-from utils import non_max_suppression_kpt
-# from utils.general import non_max_suppression_kpt
-# from utils.plots import output_to_keypoint
+from src.entity.utils import letterbox,non_max_suppression_kpt, output_to_keypoint, non_max_suppression
+
 
 class BodySizePredictor():
     def __init__(self, model_detection_path, model_keypoint_path):
