@@ -23,7 +23,7 @@ const Account = () => {
       </div>
 
       <div>
-        <h1 className='font-medium text-xl mt-8 text-gray-800'>
+        <h1 className='font-medium text-xl mt-8 text-gray-800 mb-2'>
           Pengaturan Akun
         </h1>
         <Link href='/settings'>
