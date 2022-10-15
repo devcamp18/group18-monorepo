@@ -9,8 +9,12 @@ from src.repositories import BodySizePredictor
 
 class PredictorService:
     @inject
-    def __init__(self, body_predictor: BodySizePredictor) -> None:
-        self.body_predictor = body_predictor
+    def __init__(
+        self,
+        # body_predictor: BodySizePredictor
+    ) -> None:
+        # self.body_predictor = body_predictor
+        pass
 
     def predict_body(self, spec: GetBodySizePredictorRequest) -> BodySizeResponse:
         # width, length = self.body_predictor.calculate(
