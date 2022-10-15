@@ -47,7 +47,7 @@ class UserRepository:
         )
 
         if updated_result.modified_count == 0:
-            raise BaseException(message="User not found", code=404)
+            print("No user data updated")
 
         user = database["user"].find_one({"_id": user_id})
 
