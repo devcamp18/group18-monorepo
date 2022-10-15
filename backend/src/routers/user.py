@@ -7,6 +7,7 @@ from src.specs.user import (
     LoginRequest,
     CreateUserResponse,
     CreateUserRequest,
+    UpdateClothSizeRequest,
 )
 from src.services import UserService
 from src.di import injector
@@ -44,6 +45,16 @@ def create_user(spec: CreateUserRequest):
         status="success",
         message="Success Create User",
         data=user
+    )
+
+
+@router.post("/users/{id}/clothes_size", response_model=GetUserResponse)
+def post_user_clothes_size(id: str, spec: UpdateClothSizeRequest):
+    user = _user_service.post_user_clothes_size(id, spec)
+    return GetUserResponse(
+        status="success",
+        message="Success Update Clothes Size",
+        data=user,
     )
 
 
