@@ -1,14 +1,32 @@
 import { NextPage } from 'next';
 import React, { useState } from 'react';
+import { AuthService } from '../../services/AuthService';
+import { StorageService } from '../../services/StorageService';
 import Layout from '../../widgets/Layout';
+import { KEY } from '../../constants/key.constant';
+import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 const LoginPage: NextPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const authService = new AuthService();
+  const storageService = new StorageService();
+  const router = useRouter();
 
-  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ email, password });
+    try {
+      const user = await authService.login(email);
+      if (user) {
+        storageService.save(KEY.USER, user);
+        router.push('/');
+      } else {
+        toast.error('User not found!');
+      }
+    } catch (e: unknown) {
+      toast.error('Ups, an error occured');
+    }
   };
 
   return (
