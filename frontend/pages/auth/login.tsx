@@ -12,7 +12,7 @@ const LoginPage: NextPage = () => {
   };
 
   return (
-    <Layout>
+    <Layout withBackBtn={false}>
       <h1 className='text-center text-2xl font-bold mt-4'>Sign In</h1>
 
       <form onSubmit={onSubmit} className='mt-8'>

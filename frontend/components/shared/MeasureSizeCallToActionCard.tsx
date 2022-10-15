@@ -1,13 +1,10 @@
 type Props = {
-  withButton?: true;
+  withButton?: boolean;
 };
 
-const MeasureSizeCallToActionCard = ({ withButton }: Props) => {
+const MeasureSizeCallToActionCard = ({ withButton = true }: Props) => {
   return (
-    <div
-      style={{ color: '#F9F9F9' }}
-      className='border border-gray-200 rounded-md px-2 py-3'
-    >
+    <div style={{ color: '#F9F9F9' }} className='border border-gray-200 rounded-md px-2 py-3'>
       <div className='flex'>
         <div>
           <div className='w-12 h-12 rounded-md border bg-gray-100'>
@@ -18,8 +15,7 @@ const MeasureSizeCallToActionCard = ({ withButton }: Props) => {
         <div className='text-black ml-3'>
           <h3 className='font-semibold'>Ukuran badan</h3>
           <p className='text-sm'>
-            Tentukan ukuran badanmu untuk mendapatkan rekomendasi ukuran yang
-            sesuai
+            Tentukan ukuran badanmu untuk mendapatkan rekomendasi ukuran yang sesuai
           </p>
         </div>
       </div>
