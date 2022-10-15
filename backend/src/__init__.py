@@ -1,6 +1,9 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+import sentry_sdk
+from sentry_sdk.integrations.starlette import StarletteIntegration
+from sentry_sdk.integrations.fastapi import FastApiIntegration
 
 from src.driver.session import SessionManager
 from src.routers import (
@@ -10,8 +13,27 @@ from src.routers import (
 )
 from .di import injector
 from .exceptions import BaseException
+from .constants import (
+    SENTRY_DSN,
+    APP_ENV,
+)
 
 app = FastAPI()
+
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    integrations=[
+        StarletteIntegration(),
+        FastApiIntegration(),
+    ],
+    environment=APP_ENV,
+    send_default_pii=True,
+    attach_stacktrace=True,
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=0.5,
+)
 
 app.include_router(user_router)
 app.include_router(product_router)
