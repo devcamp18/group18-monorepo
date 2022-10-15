@@ -4,6 +4,8 @@ from fastapi.encoders import jsonable_encoder
 
 from src.driver.session import SessionManager
 from src.models import User
+from src.specs.user import UpdateClothSizeRequest
+from src.exceptions import BaseException
 
 
 class UserRepository:
@@ -35,3 +37,18 @@ class UserRepository:
         result_user = database["user"].find_one({"_id": user.inserted_id})
 
         return result_user
+
+    def update_clothes_size(self, user_id: str, spec: UpdateClothSizeRequest) -> Optional[User]:
+        database = self.session_manager.get_database()
+        updated_result = database["user"].update_one(
+            {"_id":user_id},
+            {'$set': {'width': spec.width, 'length': spec.length}},
+            upsert=True
+        )
+
+        if updated_result.modified_count == 0:
+            raise BaseException(message="User not found", code=404)
+
+        user = database["user"].find_one({"_id": user_id})
+
+        return user

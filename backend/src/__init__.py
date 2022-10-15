@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from src.driver.session import SessionManager
 from src.routers import user_router, product_router
 from .di import injector
+from .exceptions import BaseException
 
 app = FastAPI()
 
@@ -36,10 +37,13 @@ def shutdown():
 
 
 @app.exception_handler(Exception)
-def unicorn_exception_handler(request: Request, exc: Exception):
+def unicorn_exception_handler(request: Request, exc: BaseException):
+    code = getattr(exc, "code", 500)
+    message = getattr(exc, "message", str(exc))
+    print(code, message)
     return JSONResponse(
-        status_code=500,
-        content=str(exc),
+        status_code=code,
+        content=message,
     )
 
 

@@ -1,10 +1,6 @@
 import uuid
+from typing import Optional
 from pydantic import BaseModel, Field
-
-
-class BodySize(BaseModel):
-    width: float = Field(...)
-    length: float = Field(...)
 
 
 class User(BaseModel):
@@ -12,7 +8,8 @@ class User(BaseModel):
     name: str = Field(...)
     email: str = Field(...)
     profile_url: str = Field(...)
-    body_size: BodySize = Field(...)
+    width: Optional[float] = Field(...)
+    length: Optional[float] = Field(...)
 
     class Config:
         allow_population_by_field_name = True
