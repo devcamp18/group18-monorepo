@@ -56,7 +56,9 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
       </section>
 
       <section className='mt-6'>
-        <button className='w-full font-semibold px-4 py-3 bg-primary-dark rounded-md text-white'>
+        <button
+          disabled
+          className='w-full font-semibold px-4 py-3 bg-gray-300 rounded-md text-white'>
           Add to Cart
         </button>
       </section>

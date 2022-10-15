@@ -14,18 +14,14 @@ type Props = {
   withBackBtn?: boolean;
 };
 
-const Layout: React.FC<Props> = ({
-  children,
-  navTitle,
-  withBackBtn = true,
-}) => {
+const Layout: React.FC<Props> = ({ children, navTitle, withBackBtn = true }) => {
   const router = useRouter();
   const { currentUser, signOut } = useAuth();
 
   return (
     <div>
       <Head>
-        <title>Devcamp 18</title>
+        <title>Devcampedia</title>
         <meta name='description' content='Devcamp 18' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
@@ -37,9 +33,7 @@ const Layout: React.FC<Props> = ({
               <ChevronLeftIcon className='w-8 h-8 mr-2' />
             </button>
           )}
-          <div className='font-bold text-lg mt-1'>
-            {navTitle ?? 'Devcamp Store'}
-          </div>
+          <div className='font-bold text-lg mt-1'>{navTitle ?? 'Devcampedia'}</div>
         </div>
 
         {!router.pathname.includes('/auth/login') && (
