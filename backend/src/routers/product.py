@@ -9,10 +9,13 @@ from src.services import ProductService
 from src.di import injector
 
 _product_service = injector.get(ProductService)
-router = APIRouter(tags=["Products"])
+router = APIRouter(
+    prefix="/products",
+    tags=["Products"]
+)
 
 
-@router.get("/products", response_model=GetProductAllResponse)
+@router.get("", response_model=GetProductAllResponse)
 def get_users(request: Request):
     users = _product_service.get_product_all()
     return GetProductAllResponse(
@@ -22,7 +25,7 @@ def get_users(request: Request):
     )
 
 
-@router.get("/products/{id}", response_model=GetProductResponse)
+@router.get("/{id}", response_model=GetProductResponse)
 def get_user_by_id(id: str, request: Request):
     user = _product_service.get_product_by_id(id)
     return GetProductResponse(

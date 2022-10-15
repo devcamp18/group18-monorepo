@@ -14,11 +14,12 @@ from src.di import injector
 
 _user_service = injector.get(UserService)
 router = APIRouter(
+    prefix="/users",
     tags=["Users"],
 )
 
 
-@router.get("/users", response_model=GetUserAllResponse)
+@router.get("", response_model=GetUserAllResponse)
 def get_users(request: Request):
     users = _user_service.get_user_all()
     return GetUserAllResponse(
@@ -28,17 +29,7 @@ def get_users(request: Request):
     )
 
 
-@router.get("/users/{id}", response_model=GetUserResponse)
-def get_user_by_id(id: str, request: Request):
-    user = _user_service.get_user_by_id(id)
-    return GetUserResponse(
-        status="success",
-        message="Successfully retrieved user",
-        data=user
-    )
-
-
-@router.post("/users", response_model=CreateUserResponse)
+@router.post("", response_model=CreateUserResponse)
 def create_user(spec: CreateUserRequest):
     user = _user_service.create(spec)
     return CreateUserResponse(
@@ -48,7 +39,17 @@ def create_user(spec: CreateUserRequest):
     )
 
 
-@router.post("/users/{id}/clothes_size", response_model=GetUserResponse)
+@router.get("/{id}", response_model=GetUserResponse)
+def get_user_by_id(id: str, request: Request):
+    user = _user_service.get_user_by_id(id)
+    return GetUserResponse(
+        status="success",
+        message="Successfully retrieved user",
+        data=user
+    )
+
+
+@router.post("/{id}/clothes_size", response_model=GetUserResponse)
 def post_user_clothes_size(id: str, spec: UpdateClothSizeRequest):
     user = _user_service.post_user_clothes_size(id, spec)
     return GetUserResponse(
