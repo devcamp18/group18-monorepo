@@ -1,4 +1,4 @@
-const BodySizeCallToActionCard = () => {
+const MeasureSizeCallToActionCard = () => {
   return (
     <div style={{ color: '#F9F9F9' }} className='border border-gray-200 rounded-md px-2 py-3'>
       <div className='flex'>
@@ -23,4 +23,4 @@ const BodySizeCallToActionCard = () => {
   );
 };
 
-export default BodySizeCallToActionCard;
+export default MeasureSizeCallToActionCard;

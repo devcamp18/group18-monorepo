@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from 'next';
-import BodySizeCallToActionCard from '../../components/shared/BodySizeCallToActionCard';
+import MeasureSizeCallToActionCard from '../../components/shared/MeasureSizeCallToActionCard';
 import Layout from '../../widgets/Layout';
 
 const ProductDetailPage: NextPage = () => {
@@ -29,7 +29,7 @@ const ProductDetailPage: NextPage = () => {
       <div className='border-b my-6'></div>
 
       <section>
-        <BodySizeCallToActionCard />
+        <MeasureSizeCallToActionCard />
 
         <div className='mt-4'>
           <span className='font-bold'>Pilih ukuran</span>
