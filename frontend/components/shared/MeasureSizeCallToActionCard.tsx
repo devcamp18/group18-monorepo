@@ -27,7 +27,7 @@ const MeasureSizeCallToActionCard = ({ withButton = true }: Props) => {
       {withButton && (
         <Link href='/settings'>
           <button className='bg-primary-dark px-2 py-2 text-white font-semibold w-full rounded-md mt-3'>
-            Coba sekarang
+            Ukur sekarang
           </button>
         </Link>
       )}

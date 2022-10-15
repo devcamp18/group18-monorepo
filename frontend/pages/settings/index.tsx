@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import Layout from '../../widgets/Layout';
 
-const Account = () => {
+const Settings = () => {
   return (
     <Layout>
       <form className='flex flex-col gap-4'>
@@ -9,7 +10,7 @@ const Account = () => {
             className='block text-gray-700 text-sm font-bold '
             htmlFor='width'
           >
-            Lebar Baju (Centimeter)
+            Lebar Baju (Cm)
           </label>
           <input
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -23,7 +24,7 @@ const Account = () => {
             className='block text-gray-700 text-sm font-bold '
             htmlFor='height'
           >
-            Tinggi Baju (Centimeter)
+            Tinggi Baju (Cm)
           </label>
           <input
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -34,13 +35,13 @@ const Account = () => {
         </div>
         <p>
           Gak tau ukuran bajumu? Pap badan kamu dan kami bakal bantu ukurin.{' '}
-          <a href='' className='text-primary font-semibold'>
-            Ukur sekarang!
-          </a>
+          <Link href='/measure'>
+            <a className='text-primary-dark font-semibold'>Ukur sekarang!</a>
+          </Link>
         </p>
 
         <button
-          className='bg-primary hover:bg-primary-dark text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
+          className='bg-primary-dark text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
           type='button'
         >
           Simpan
@@ -50,4 +51,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default Settings;

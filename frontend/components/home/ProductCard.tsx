@@ -1,22 +1,27 @@
-import Link from 'next/link';
-
 /* eslint-disable @next/next/no-img-element */
-const ProductCard = () => {
+import Link from 'next/link';
+import { Product } from '../../models/Product';
+
+type Props = {
+  product: Product;
+};
+
+const ProductCard = ({ product }: Props) => {
   return (
-    <Link href='/products/123'>
+    <Link href={`/products/${product._id}`}>
       <div className='min-w-[10rem]'>
         <div className='border border-gray-200 rounded'>
           <img
-            className='rounded mx-auto'
-            src='https://i.ibb.co/WxZxqSC/basic-t-shirt-with-logo-man-black-63700-zoom-2.jpg'
-            alt='Shirt'
+            className='rounded mx-auto object-cover'
+            src={product.img_url}
+            alt={product.name}
             width={150}
             height={150}
           />
         </div>
 
-        <div className='mt-2'>T-Shirt Polos</div>
-        <div className='font-bold'>Rp. 30.000, 00</div>
+        <div className='mt-2'>{product.name}</div>
+        <div className='font-bold'>Rp. {product.price}, 00</div>
       </div>
     </Link>
   );
