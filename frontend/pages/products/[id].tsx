@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextPage } from 'next';
+import MeasuredSizeCard from '../../components/shared/MeasuredSizeCard';
 import MeasureSizeCallToActionCard from '../../components/shared/MeasureSizeCallToActionCard';
 import Layout from '../../widgets/Layout';
 
@@ -30,6 +31,7 @@ const ProductDetailPage: NextPage = () => {
 
       <section>
         <MeasureSizeCallToActionCard />
+        {/* <MeasuredSizeCard size='M' /> */}
 
         <div className='mt-4'>
           <span className='font-bold'>Pilih ukuran</span>
