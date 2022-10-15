@@ -1,7 +1,8 @@
 from typing import List
+from pydantic import BaseModel
 
 from src.response import BaseResponse
-from .model import User
+from src.models import User
 
 
 class GetUserResponse(BaseResponse):
@@ -10,3 +11,11 @@ class GetUserResponse(BaseResponse):
 
 class GetUserAllResponse(BaseResponse):
     data: List[User]
+
+
+class LoginRequest(BaseModel):
+    email: str
+
+
+class LoginResponse(BaseResponse):
+    data: User

@@ -1,10 +1,8 @@
 from injector import Binder, Module, singleton
 
-from .repository import UserRepository
-from .service import UserService
+from .user import UserRepository  # noqa
 
 
-class UserModule(Module):
+class RepositoryModule(Module):
     def configure(self, binder: Binder) -> None:
         binder.bind(UserRepository, to=UserRepository, scope=singleton)
-        binder.bind(UserService, to=UserService, scope=singleton)

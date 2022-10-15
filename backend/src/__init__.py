@@ -2,14 +2,14 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from src.response import BaseResponse
-from src.user.response import GetUserResponse, GetUserAllResponse
-from src.user.service import UserService
 from src.driver.session import SessionManager
+from src.routers import user
 from .di import injector
 
 app = FastAPI()
 
+
+app.include_router(user.router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins = ["*"],
@@ -47,25 +47,3 @@ def unicorn_exception_handler(request: Request, exc: Exception):
 @app.get("/ping")
 async def ping():
     return {"message": "pong"}
-
-
-@app.get("/users", response_model=GetUserAllResponse)
-def get_users(request: Request):
-    user_service = injector.get(UserService)
-    users = user_service.get_user_all()
-    return GetUserAllResponse(
-        status="success",
-        message="Successfully retrieved users",
-        data=users
-    )
-
-
-@app.get("/users/{id}", response_model=GetUserResponse)
-def get_users(id: str, request: Request):
-    user_service = injector.get(UserService)
-    user = user_service.get_user_by_id(id)
-    return GetUserResponse(
-        status="success",
-        message="Successfully retrieved user",
-        data=user
-    )
