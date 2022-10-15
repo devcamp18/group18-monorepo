@@ -6,7 +6,7 @@ import { BaseService } from './BaseService';
 export class AuthService extends BaseService {
   public async login(email: string) {
     return axios
-      .post<Response<User>>(`${this.API_URL}/login`, { email })
+      .post<Response<User>>(`${this.API_URL}/users/login`, { email })
       .then((res) => res.data.data);
   }
 }
