@@ -9,8 +9,8 @@ class User(BaseModel):
     email: str = Field(...)
     profile_url: str = Field(...)
     has_body_size: bool = False
-    width: Optional[float] = None
-    length: Optional[float] = None
+    width: Optional[float] = 0
+    length: Optional[float] = 0
 
     class Config:
         allow_population_by_field_name = True
@@ -18,6 +18,8 @@ class User(BaseModel):
     @root_validator
     def check_has_body_size(cls, values) -> dict:
 
-        values["has_body_size"] = values["width"] != None and values["length"] != None
-        
+        values["has_body_size"] = not (
+            not values["width"] and not values["length"]
+        )
+
         return values
