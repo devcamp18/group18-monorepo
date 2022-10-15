@@ -12,11 +12,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !currentUser && router.pathname !== '/auth/login') {
+    const clientLoaded = typeof window !== 'undefined' && currentUser !== undefined;
+    if (clientLoaded && currentUser == null && router.pathname !== '/auth/login') {
       router.push('/auth/login');
     }
 
-    if (typeof window !== 'undefined' && currentUser && router.pathname === '/auth/login') {
+    if (clientLoaded && currentUser && router.pathname === '/auth/login') {
       router.push('/');
     }
   }, [currentUser, router]);
