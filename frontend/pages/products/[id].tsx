@@ -13,7 +13,7 @@ type Props = {
   product: Product;
 };
 
-const ProductDetailPage: NextPage = ({ product }: Props) => {
+const ProductDetailPage: NextPage<Props> = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes[0].name);
   const { currentUser } = useAuth();
   const [recommendedSizes, setRecommendedSizes] = useState<string[]>([]);
