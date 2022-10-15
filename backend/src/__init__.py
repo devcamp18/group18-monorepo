@@ -3,7 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from src.driver.session import SessionManager
-from src.routers import user_router, product_router
+from src.routers import (
+    user_router,
+    product_router,
+    predictor_router,
+)
 from .di import injector
 from .exceptions import BaseException
 
@@ -11,6 +15,7 @@ app = FastAPI()
 
 app.include_router(user_router)
 app.include_router(product_router)
+app.include_router(predictor_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins = ["*"],

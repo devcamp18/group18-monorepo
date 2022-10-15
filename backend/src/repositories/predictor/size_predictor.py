@@ -6,15 +6,16 @@ from torchvision import transforms
 import numpy as np
 
 from .utils import letterbox,non_max_suppression_kpt, output_to_keypoint, non_max_suppression
+from src.constants import MODEL_DETECTION_PATH, MODEL_KEYPOINT_PATH
 
 
 class BodySizePredictor:
-    def __init__(self, model_detection_path, model_keypoint_path):
+    def __init__(self):
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         # Initialize Keypoint Model
-        print(model_keypoint_path)
-        weigths_keypoint = torch.load(model_keypoint_path, map_location=device)
+        print(MODEL_KEYPOINT_PATH)
+        weigths_keypoint = torch.load(MODEL_KEYPOINT_PATH, map_location=device)
         self.model_keypoint = weigths_keypoint['model']
         _ = self.model_keypoint.float().eval()
 
@@ -23,7 +24,7 @@ class BodySizePredictor:
 
 
         # Initialize Detection Model
-        weigths_detection = torch.load(model_detection_path, map_location=device)
+        weigths_detection = torch.load(MODEL_DETECTION_PATH, map_location=device)
         self.model_detection = weigths_detection['model']
         _ = self.model_detection.float().eval()
 
@@ -86,9 +87,10 @@ class BodySizePredictor:
 
         return image
 
-    def get_image_from_bytes(self, img_bytes) -> torch.Tensor:
+    def get_image_from_bytes(self, img_bytes: bytes) -> torch.Tensor:
         nparr = np.fromstring(img_bytes, np.uint8)
         img_np = cv2.imdecode(nparr, cv2.CV_LOAD_IMAGE_COLOR)
+        image = letterbox(image, 960, stride=64, auto=True)[0]
 
         return img_np
 

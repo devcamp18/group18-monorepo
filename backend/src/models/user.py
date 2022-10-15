@@ -16,7 +16,7 @@ class User(BaseModel):
         allow_population_by_field_name = True
 
     @root_validator
-    def compute_area(cls, values) -> dict:
+    def check_has_body_size(cls, values) -> dict:
 
         values["has_body_size"] = values["width"] != None and values["length"] != None
         
