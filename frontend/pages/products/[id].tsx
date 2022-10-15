@@ -38,10 +38,10 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
         <div className='mt-4'>
           <span className='font-bold'>Pilih ukuran</span>
           <ul className='flex space-x-4 overflow-auto pb-2 mt-2'>
-            {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-              <li key={size}>
+            {product.sizes.map((size) => (
+              <li key={size.name}>
                 <button className='w-20 p-2 text-center border border-gray-400 rounded-md'>
-                  {size}
+                  {size.name}
                 </button>
               </li>
             ))}

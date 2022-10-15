@@ -15,7 +15,7 @@ const Home: NextPage<Props> = ({ products }) => {
         <h1 className='uppercase font-bold text-xl'>Hot deals &#128293;</h1>
 
         <ul className='flex space-x-4 overflow-auto mt-4 pb-4'>
-          {products.map((product) => (
+          {products.slice(0, 3).map((product) => (
             <ProductCard product={product} key={product._id} />
           ))}
         </ul>
@@ -26,7 +26,7 @@ const Home: NextPage<Props> = ({ products }) => {
       <section className='mt-8'>
         <h1 className='uppercase font-bold text-xl'>For you</h1>
         <ul className='grid grid-cols-2 gap-x-4 gap-y-6 mt-4'>
-          {products.map((product) => (
+          {products.slice(3).map((product) => (
             <ProductCard product={product} key={product._id} />
           ))}
         </ul>
