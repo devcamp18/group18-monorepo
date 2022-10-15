@@ -1,8 +1,9 @@
 from typing import List
 from injector import inject
 
-from .model import User
-from .repository import UserRepository
+from src.specs.user import LoginRequest
+from src.models import User
+from src.repositories import UserRepository
 
 
 class UserService:
@@ -17,5 +18,10 @@ class UserService:
 
     def get_user_all(self) -> List[User]:
         users = self.user_repo.get_user_all()
+
+        return users
+
+    def login(self, spec: LoginRequest) -> User:
+        users = self.user_repo.get_user_by_email(spec.email)
 
         return users
