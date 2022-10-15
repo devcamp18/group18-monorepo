@@ -1,1 +1,1 @@
-from size_predictor import BodySizePredictor  # noqa: E402
+from .size_predictor import BodySizePredictor  # noqa: E402
