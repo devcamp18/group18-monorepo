@@ -6,7 +6,7 @@ from src.models import User
 
 
 class GetUserResponse(BaseResponse):
-    data: User
+    data: Optional[User]
 
 
 class GetUserAllResponse(BaseResponse):
@@ -18,4 +18,4 @@ class LoginRequest(BaseModel):
 
 
 class LoginResponse(BaseResponse):
-    data: User
+    data: Optional[User]
