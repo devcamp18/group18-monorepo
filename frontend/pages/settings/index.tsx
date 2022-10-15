@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
 import { UserService } from '../../services/UserService';
@@ -10,6 +10,13 @@ const Settings = () => {
   const [length, setLength] = useState(0);
   const userService = new UserService();
   const { currentUser, refetchUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser) {
+      setWidth(currentUser.width);
+      setLength(currentUser.length);
+    }
+  }, [currentUser]);
 
   const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,7 +45,7 @@ const Settings = () => {
       <form onSubmit={onSubmit} className='flex flex-col gap-4'>
         <div className='flex flex-col gap-2'>
           <label className='block text-gray-700 text-sm font-bold ' htmlFor='width'>
-            Lebar Baju (Cm)
+            Upper body width (cm)
           </label>
           {currentUser ? (
             <input
@@ -62,7 +69,7 @@ const Settings = () => {
         </div>
         <div className='flex flex-col gap-2'>
           <label className='block text-gray-700 text-sm font-bold ' htmlFor='height'>
-            Tinggi Baju (Cm)
+            Upper body length (cm)
           </label>
           {currentUser ? (
             <input

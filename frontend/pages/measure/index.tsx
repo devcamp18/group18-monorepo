@@ -4,6 +4,7 @@ import Layout from '../../widgets/Layout';
 
 const Measure = () => {
   const [Picture, setPicture] = useState('');
+
   const handlePictureChange = (e: any) => {
     setPicture(() => {
       try {
@@ -13,26 +14,24 @@ const Measure = () => {
       }
     });
   };
+
   return (
     <Layout>
       <form className='flex flex-col gap-4'>
         <div className='flex flex-col gap-2'>
-          <label
-            className='block text-gray-700 text-sm font-bold '
-            htmlFor='height'
-          >
-            Tinggi Badan (Cm)
+          <label className='block text-gray-700 text-sm font-bold ' htmlFor='height'>
+            Body Height (cm)
           </label>
           <input
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             id='height'
             type='number'
-            placeholder='Gausah dilebihin'
+            placeholder='Height'
           />
         </div>
         <div className='flex flex-col gap-2'>
           <label className='block text-gray-700 text-sm font-bold '>
-            Pap Full Body (Seperti Contoh)
+            Full Body Photo (as example)
           </label>
           <div className='flex flex-col items-center'>
             <Image
@@ -48,9 +47,8 @@ const Measure = () => {
           </div>
           <label
             className='block text-sm font-bold w-full text-primary-dark p-2 rounded text-center border border-primary-dark border-dashed cursor-pointer'
-            htmlFor='picture'
-          >
-            {Picture ? 'Foto Ulang' : 'Ambil Foto'}
+            htmlFor='picture'>
+            {Picture ? 'Retake' : 'Take picture'}
           </label>
           <input
             type='file'
@@ -65,9 +63,8 @@ const Measure = () => {
 
         <button
           className='bg-primary-dark text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
-          type='button'
-        >
-          Prediksi Ukuran Baju
+          type='button'>
+          Predict my size
         </button>
       </form>
     </Layout>
