@@ -10,3 +10,4 @@ class GetProductResponse(BaseResponse):
 
 class GetProductAllResponse(BaseResponse):
     data: List[Product]
+ 

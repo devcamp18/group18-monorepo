@@ -2,11 +2,17 @@ import uuid
 from pydantic import BaseModel, Field
 
 
+class BodySize(BaseModel):
+    width: float = Field(...)
+    length: float = Field(...)
+
+
 class User(BaseModel):
     id: str = Field(default_factory=uuid.uuid4, alias="_id")
     name: str = Field(...)
     email: str = Field(...)
     profile_url: str = Field(...)
+    body_size: BodySize = Field(...)
 
     class Config:
         allow_population_by_field_name = True
