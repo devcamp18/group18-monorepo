@@ -4,7 +4,7 @@ import Layout from '../widgets/Layout';
 
 const Home: NextPage = () => {
   return (
-    <Layout>
+    <Layout withBackBtn={false}>
       <section>
         <h1 className='uppercase font-bold text-xl'>Hot deals &#128293;</h1>
 

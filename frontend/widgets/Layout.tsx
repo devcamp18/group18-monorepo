@@ -1,24 +1,34 @@
 import Head from 'next/head';
+import { ChevronLeftIcon } from '@heroicons/react/20/solid';
+import { useRouter } from 'next/router';
 
 type Props = {
   navTitle?: string;
   children: React.ReactNode;
+  withBackBtn?: boolean;
 };
 
-const Layout: React.FC<Props> = ({ children, navTitle }) => {
+const Layout: React.FC<Props> = ({ children, navTitle, withBackBtn = true }) => {
+  const router = useRouter();
+
   return (
     <div>
       <Head>
         <title>Devcamp 18</title>
         <meta name='description' content='Devcamp 18' />
         <link rel='icon' href='/favicon.ico' />
-        <script
-          defer
-          src='https://kit.fontawesome.com/de5313551e.js'
-          crossOrigin='anonymous'></script>
       </Head>
 
-      <nav className='w-full bg-primary text-white p-4 font-medium'>{navTitle ?? 'Devcamp 18'}</nav>
+      <nav className='w-full bg-primary text-white p-4 font-medium'>
+        <div className='flex items-center'>
+          {withBackBtn && (
+            <button onClick={() => router.back()}>
+              <ChevronLeftIcon className='w-8 h-8 mr-2' />
+            </button>
+          )}
+          <div className='font-bold text-lg mt-1'>{navTitle ?? 'Devcamp Store'}</div>
+        </div>
+      </nav>
 
       <main className='p-4'>{children}</main>
     </div>
