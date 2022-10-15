@@ -61,7 +61,24 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
       <div className='border-b my-6'></div>
 
       <section>
-        <p>{product.description}</p>
+        <div className='border rounded-md p-2'>
+          <h3 className='font-semibold'>Detail ukuran</h3>
+          <ul className='mt-2'>
+            {product.sizes.map((size) => (
+              <li
+                className={`flex ${selectedSize === size.name ? 'text-primary' : 'text-black'}`}
+                key={size.name}>
+                <div className='w-12 font-bold'>{size.name}</div>
+                <div>
+                  : Panjang <strong>{size.length}</strong> cm, Lebar <strong>{size.width}</strong>{' '}
+                  cm
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className='mt-4'>{product.description}</p>
       </section>
 
       <section className='mt-6'>
