@@ -2,6 +2,8 @@
 fastapi==0.85.1
 pydantic==1.10.2
 uvicorn[standard]==0.18.3
+pymongo[srv]==4.2.0
+injector==0.20.1
 
 # supplementary
 sentry-sdk[fastapi]==1.9.5
