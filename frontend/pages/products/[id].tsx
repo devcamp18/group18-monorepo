@@ -1,29 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import MeasuredSizeCard from '../../components/shared/MeasuredSizeCard';
 import MeasureSizeCallToActionCard from '../../components/shared/MeasureSizeCallToActionCard';
+import { Product } from '../../models/Product';
+import { ProductService } from '../../services/ProductService';
 import Layout from '../../widgets/Layout';
 
-const ProductDetailPage: NextPage = () => {
+type Props = {
+  product: Product;
+};
+
+const ProductDetailPage: NextPage = ({ product }: Props) => {
   return (
     <Layout>
       <section>
         <div className='border border-gray-200 rounded-md'>
-          <img
-            src='https://i.ibb.co/DrgrBg5/basic-t-shirt-with-logo-man-black-63700-zoom.jpg'
-            className='w-full rounded-md mx-auto'
-            alt='Shirt'
-          />
+          <img src={product.img_url} className='w-full rounded-md mx-auto' alt={product.name} />
         </div>
 
-        <h1 className='mt-3'>T-Shirt Polos</h1>
-        <h2 className='font-bold text-lg'>Rp 30.000,00</h2>
+        <h1 className='mt-3'>{product.name}</h1>
+        <h2 className='font-bold text-lg'>Rp {product.price},00</h2>
         <ul className='flex'>
-          <li className='text-2xl text-yellow-300'>&#9733;</li>
-          <li className='text-2xl text-yellow-300'>&#9733;</li>
-          <li className='text-2xl text-yellow-300'>&#9733;</li>
-          <li className='text-2xl text-yellow-300'>&#9733;</li>
-          <li className='text-2xl text-yellow-300'>&#9733;</li>
+          {Array.from(Array(Math.floor(product.rating)).keys()).map((rate) => (
+            <li key={rate} className='text-2xl text-yellow-300'>
+              &#9733;
+            </li>
+          ))}
         </ul>
       </section>
 
@@ -50,11 +52,7 @@ const ProductDetailPage: NextPage = () => {
       <div className='border-b my-6'></div>
 
       <section>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. At commodi quae doloribus, animi
-          molestias dolor facere ab odit ipsa deserunt a incidunt vero, totam dicta hic numquam fuga
-          sint exercitationem?
-        </p>
+        <p>{product.description}</p>
       </section>
 
       <section className='mt-6'>
@@ -64,6 +62,27 @@ const ProductDetailPage: NextPage = () => {
       </section>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ res, req, params }) => {
+  const { id } = params as { id: string };
+
+  if (!id)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+
+  const productService = new ProductService();
+  const product = await productService.get(id);
+
+  return {
+    props: {
+      product,
+    },
+  };
 };
 
 export default ProductDetailPage;
