@@ -12,7 +12,7 @@ const ProductCard = ({ product }: Props) => {
       <div className='min-w-[10rem]'>
         <div className='border border-gray-200 rounded'>
           <img
-            className='rounded mx-auto'
+            className='rounded mx-auto object-cover'
             src={product.img_url}
             alt={product.name}
             width={150}

@@ -21,6 +21,7 @@ const LoginPage: NextPage = () => {
       if (user) {
         storageService.save(KEY.USER, user);
         router.push('/');
+        router.reload();
       } else {
         toast.error('User not found!');
       }

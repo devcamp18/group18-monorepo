@@ -18,7 +18,8 @@ export const useAuth = () => {
   const signOut = () => {
     const storageService = new StorageService();
     storageService.remove(KEY.USER);
-    router.push('/auth/login');
+    setUser(null);
+    router.reload();
   };
 
   return {

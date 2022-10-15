@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { GetServerSideProps, NextPage } from 'next';
+import { useState } from 'react';
 import MeasuredSizeCard from '../../components/shared/MeasuredSizeCard';
 import MeasureSizeCallToActionCard from '../../components/shared/MeasureSizeCallToActionCard';
 import { Product } from '../../models/Product';
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const ProductDetailPage: NextPage = ({ product }: Props) => {
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0].name);
+
   return (
     <Layout>
       <section>
@@ -38,10 +41,16 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
         <div className='mt-4'>
           <span className='font-bold'>Pilih ukuran</span>
           <ul className='flex space-x-4 overflow-auto pb-2 mt-2'>
-            {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-              <li key={size}>
-                <button className='w-20 p-2 text-center border border-gray-400 rounded-md'>
-                  {size}
+            {product.sizes.map((size) => (
+              <li key={size.name}>
+                <button
+                  onClick={() => setSelectedSize(size.name)}
+                  className={`w-20 p-2 text-center border rounded-md ${
+                    selectedSize === size.name
+                      ? 'border-primary-dark text-primary'
+                      : 'border-gray-400'
+                  }`}>
+                  {size.name}
                 </button>
               </li>
             ))}
@@ -52,7 +61,24 @@ const ProductDetailPage: NextPage = ({ product }: Props) => {
       <div className='border-b my-6'></div>
 
       <section>
-        <p>{product.description}</p>
+        <div className='border rounded-md p-2'>
+          <h3 className='font-semibold'>Detail ukuran</h3>
+          <ul className='mt-2'>
+            {product.sizes.map((size) => (
+              <li
+                className={`flex ${selectedSize === size.name ? 'text-primary' : 'text-black'}`}
+                key={size.name}>
+                <div className='min-w-[3rem] font-bold'>{size.name}</div>
+                <div>
+                  : Panjang <strong>{size.length}</strong> cm, Lebar <strong>{size.width}</strong>{' '}
+                  cm
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className='mt-4'>{product.description}</p>
       </section>
 
       <section className='mt-6'>
